@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.couch_ripper" name="Couch Ripper" version="0.1.0" provider-name="John Wesorick">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+	</requires>
+	<extension point="xbmc.python.script" library="default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Rip DVDs and Blu Rays within Kodi</summary>
+		<description>Couch Ripper uses MakeMKV and Handbrake to rip movies into Kodi at the press of a button.</description>
+		<disclaimer>Since Couch Ripper makes use of MakeMKV and Handbrake, those must be installed for it to work.</disclaimer>
+		<language></language>
+		<platform>linux</platform>
+		<license></license>
+		<forum></forum>
+		<website></website>
+		<email></email>
+		<source></source>
+	</extension>
+</addon>
