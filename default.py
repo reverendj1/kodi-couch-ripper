@@ -49,18 +49,18 @@ def main(argv):
 				e.output)
 
 	# Eject if we need to
-	# 30027 = Rip
+	# 30027 == Rip
 	if profiledict['ejectafter'] == utils.getStringLow(30027):
 		xbmc.executebuiltin('EjectTray()')
 
 	# Display notification/dialog if we need to. A notification is a toast that
 	# auto-dismisses after a few seconds, whereas a dialog requires the user to
 	# press ok.
-	# 30065 = Notification
+	# 30065 == Notification
 	if profiledict['notifyafterrip'] == utils.getStringLow(30065):
 		utils.showNotification("{rip} {completedsuccessfully}".format(rip =
 			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
-	# 30066 = Dialog
+	# 30066 == Dialog
 	elif profiledict['notifyafterrip'] == utils.getStringLow(30066):
 		utils.showOK("{rip} {completedsuccessfully}".format(rip =
 			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
@@ -73,24 +73,30 @@ def main(argv):
 	filestoencode = glob.glob(os.path.join(profiledict['tempfolder'], '*.mkv'))
 	for f in filestoencode:
 		command = buildHandBrakeCLICommand(profiledict, f)
-		# Beginning Encode. Command:
-		utils.log(getString(30070) + " " + getString(30028) + ". " + getString(30071) + ": " + command)
+		utils.log("{beginning} {encode}. {commandstr}: {command}".format(beginning =
+			getString(30070), encode = getString(30028), commandstr = getString(30071),
+			command = command))
 		output = ""
 		try:
 			output = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
 		except subprocess.CalledProcessError, e:
 			if "Encode done!" not in e.output:
-				utils.exitFailed("HandBrake " + getString(30059), e.output)
+				utils.exitFailed("HandBrake {failed}".format(failed =
+					getString(30059)), e.output)
 		if profiledict['cleanuptempdir'] == 'true':
 			os.remove(f)
 
+	# 30028 == Encode
 	if profiledict['ejectafter'] == utils.getStringLow(30028):
 		xbmc.executebuiltin('EjectTray()')
 
+	# 30065 == Notification
 	if profiledict['notifyafterencode'] == utils.getStringLow(30065):
-		utils.showNotification(utils.getString(30027) + " " + utils.getString(30058))
+		utils.showNotification("{rip} {completedsuccessfully".format(rip =
+			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
 	elif profiledict['notifyafterencode'] == utils.getStringLow(30066):
-		utils.showOK(utils.getString(30027) + " " + utils.getString(30058))
+		utils.showOK("{rip} {completedsuccessfully".format(rip =
+			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
 
 	return 0
 
@@ -119,15 +125,19 @@ def getDefaults():
 def getProfile(defaultsettings, profilenum):
 	if profilenum == '':
 		validprofiles = []
-		for profile in ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6', 'profile7', 'profile8', 'profile9', 'profile10']:
+		for profile in ['profile1', 'profile2', 'profile3', 'profile4', 'profile5',
+			'profile6', 'profile7', 'profile8', 'profile9', 'profile10']:
 			if utils.getSetting(profile + 'enabled') == 'true':
 				validprofiles.append(utils.getSetting(profile + 'prettyname'))
-		profilenum = utils.showSelectDialog(utils.getString(30010) + " - " + utils.getString(30051),validprofiles)
+		profilenum = utils.showSelectDialog("{couchripper} - {profilestr}".format(
+			couchripper = utils.getString(30010), profilestr =
+			utils.getString(30051)), validprofiles)
 		profilename = validprofiles[profilenum]
 	else:
 		profilename = utils.getSetting(profilenum + 'prettyname')
 	profiledict = []
-	for profile in ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6', 'profile7', 'profile8', 'profile9', 'profile10']:
+	for profile in ['profile1', 'profile2', 'profile3', 'profile4', 'profile5',
+		'profile6', 'profile7', 'profile8', 'profile9', 'profile10']:
 		if utils.getSetting(profile + 'prettyname') == profilename:
 			profiledict = {'makemkvpath': utils.getSetting(profile + 'makemkvpath'),
 			'handbrakeclipath': utils.getSetting(profile + 'handbrakeclipath'),
@@ -155,30 +165,48 @@ def verifyProfile(profiledict):
 	# Let's verify all of our settings.
 	errors = ""
 	if not os.path.isfile(profiledict['makemkvpath']):
-		errors = errors + utils.settingsError(utils.getString(30052) + " makemkvcon. " + utils.getString(30053))
+		errors = errors + utils.settingsError("{couldnotfind} makemkvcon. "
+			.format(couldnotfind = utils.getString(30052)))
 	if not os.path.isfile(profiledict['handbrakeclipath']):
-		errors = errors + utils.settingsError(utils.getString(30052) + " HandBrakeCLI. " + utils.getString(30053))
+		errors = errors + utils.settingsError("{couldnotfind} HandBrakeCLI. "
+			.format(couldnotfind = utils.getString(30052)))
 	if not os.path.isdir(profiledict['tempfolder']):
-		errors = errors + utils.settingsError(utils.getString(30052) + " " + profiledict[tempfolder] + ". " + utils.getString(30053) + " " )
+		errors = errors + utils.settingsError("{couldnotfind} {tempfolder}. "
+			.format(couldnotfind = utils.getString(30052), tempfolder =
+			profiledict[tempfolder]))
 	if not os.path.isdir(profiledict['destinationfolder']):
-		errors = errors + utils.settingsError(utils.getString(30052) + " " + profiledict[destinationfolder] + ". " + utils.getString(30053) + " " )
+		errors = errors + utils.settingsError("{couldnotfind} {destinationfolder}. "
+		.format(couldnotfind = utils.getString(30052), destinationfolder =
+		profiledict[destinationfolder]))
+	# 30013 == High, 30015 == Low, 30019 == Normal
 	if ( profiledict['niceness'] != utils.getStringLow(30013) and
 		profiledict['niceness'] != utils.getStringLow(30015) and
 		profiledict['niceness'] != utils.getStringLow(30019) ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30018) + " " )
+		errors = errors + utils.settingsError("{invalid} {niceness}. "
+			.format(invalid = utils.getString(30056),
+			niceness = utils.getString(30018)))
+	# 30042 == 1080, 30043 == 720, 30044 == 480
 	if ( profiledict['resolution'] != utils.getStringLow(30042) and
 		profiledict['resolution'] != utils.getStringLow(30043) and
 		profiledict['resolution'] != utils.getStringLow(30044) ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30011) + " " )
+		errors = errors + utils.settingsError("{invalid} {resolution}. "
+			.format(invalid = utils.getString(30056),
+			resolution = utils.getString(30011)))
+	# 30013 == High, 30015 == Low, 30014 == Medium
 	if ( profiledict['quality'] != utils.getStringLow(30013) and
 		profiledict['quality'] != utils.getStringLow(30014) and
 		profiledict['quality'] != utils.getStringLow(30015) ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30012) + " " )
+		errors = errors + utils.settingsError("{invalid} {quality}. "
+			.format(invalid = utils.getString(30056),
+			quality = utils.getString(30012)))
 	if not profiledict['mintitlelength'].isdigit():
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30022) + " " )
+		errors = errors + utils.settingsError("{invalid} {mintitlelength}. "
+			.format(invalid = utils.getString(30056),
+			mintitlelength = utils.getString(30022)))
 
-	# List of valid ISO-639.2 language names. From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt
-	# This is the format that HandBrake requires language arguments to be in.
+	# List of valid ISO-639.2 language names.
+	# From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This is the
+	# format that HandBrake requires language arguments to be in.
 	validlanguages = [ 'all', 'aar', 'abk', 'ace', 'ach', 'ada', 'ady', 'afa', 'afh',
 		'afr', 'ain', 'aka', 'akk', 'alb', 'ale', 'alg', 'alt', 'amh', 'ang', 'anp',
 		'apa', 'ara', 'arc', 'arg', 'arm', 'arn', 'arp', 'art', 'arw', 'asm', 'ast',
@@ -226,34 +254,54 @@ def verifyProfile(profiledict):
 		'zha', 'znd', 'zul', 'zun', 'zxx', 'zza' ]
 
 	if profiledict['nativelanguage'] not in validlanguages:
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30023) + " " )
+		errors = errors + utils.settingsError("{invalid} {nativelanguage}. "
+			.format(invalid = utils.getString(30056),
+			nativelanguage = utils.getString(30023)))
 	if ( profiledict['foreignaudio'] != 'true' and profiledict['foreignaudio'] != 'false' ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30024) + " " )
+		errors = errors + utils.settingsError("{invalid} {foreignaudio}. "
+			.format(invalid = utils.getString(30056),
+			foreignaudio = utils.getString(30024)))
 	if ( profiledict['encodeafterrip'] != 'true' and profiledict['encodeafterrip'] != 'false' ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30025) + " " )
+		errors = errors + utils.settingsError("{invalid} {encodeafterrip}. "
+			.format(invalid = utils.getString(30056),
+			encodeafterrip = utils.getString(30025)))
 	if ( profiledict['cleanuptempdir'] != 'true' and profiledict['cleanuptempdir'] != 'false' ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30030) + " " )
+		errors = errors + utils.settingsError("{invalid} {cleanuptempdir}. "
+			.format(invalid = utils.getString(30056),
+			cleanuptempdir = utils.getString(30030)))
 	if ( profiledict['blackandwhite'] != 'true' and profiledict['blackandwhite'] != 'false' ):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30060) + " " )
+		errors = errors + utils.settingsError("{invalid} {blackandwhite}. "
+			.format(invalid = utils.getString(30056),
+			blackandwhite = utils.getString(30060)))
+	# 30027 == Rip, 30028 == Encode, 30029 == Never
 	if ( profiledict['ejectafter'] != utils.getStringLow(30027) and
 		profiledict['ejectafter'] != utils.getStringLow(30028) and
 		profiledict['ejectafter'] != utils.getStringLow(30029)):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30026) + " " )
+		errors = errors + utils.settingsError("{invalid} {ejectafter}. "
+			.format(invalid = utils.getString(30056),
+			ejectafter = utils.getString(30026)))
+	# 30065 == Notification,
 	if ( profiledict['notifyafterrip'] != utils.getStringLow(30065) and
 		profiledict['notifyafterrip'] != utils.getStringLow(30066) and
 		profiledict['notifyafterrip'] != utils.getStringLow(30067)):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30049) + " " )
+		errors = errors + utils.settingsError("{invalid} {notifyafterrip}. "
+			.format(invalid = utils.getString(30056),
+			notifyafterrip = utils.getString(30049)))
 	if ( profiledict['notifyafterencode'] != utils.getStringLow(30065) and
 		profiledict['notifyafterencode'] != utils.getStringLow(30066) and
 		profiledict['notifyafterencode'] != utils.getStringLow(30067)):
-		errors = errors + utils.settingsError(utils.getString(30056) + " " + utils.getString(30061) + " " )
+		errors = errors + utils.settingsError("{invalid} {notifyafterencode}. "
+			.format(invalid = utils.getString(30056),
+			notifyafterencode = utils.getString(30061)))
 
 	if errors:
 		utils.exitFailed(errors, errors)
 
 def buildMakeMKVConCommand(profiledict):
 	niceness = ""
-	if (profiledict['niceness'] == utils.getString(30013).lower() or profiledict['niceness'] == utils.getString(30015).lower()):
+	# 30013 == High, 30015 == Low
+	if (profiledict['niceness'] == utils.getString(30013).lower()
+		or profiledict['niceness'] == utils.getString(30015).lower()):
 		if (platform.system() == 'Windows'):
 			if (profiledict['niceness'] == utils.getStringLow(30013)):
 				niceness = "start /wait /b /high "
@@ -274,7 +322,9 @@ def buildMakeMKVConCommand(profiledict):
 
 def buildHandBrakeCLICommand(profiledict, f):
 	niceness = ""
-	if (profiledict['niceness'] == utils.getString(30013).lower() or profiledict['niceness'] == utils.getString(30015).lower()):
+	# 30013 == High, 30015 == Low, 30014 == Medium
+	if (profiledict['niceness'] == utils.getString(30013).lower()
+		or profiledict['niceness'] == utils.getString(30015).lower()):
 		if (platform.system() == 'Windows'):
 			if (profiledict['niceness'] == utils.getStringLow(30013)):
 				niceness = "start /wait /b /high "
@@ -307,21 +357,25 @@ def buildHandBrakeCLICommand(profiledict, f):
 
 	additionalhandbrakeargs = " " + profiledict['additionalhandbrakeargs']
 
-	# To make things easier when we rip foreign films, we just grab all the audio tracks.
-	# Otherwise it can be hard to grab just the native language of the movie and the
-	# native language of the user. Since grabbing all audio tracks doesn't appear to be
-	# an option with HandBrake, I just grab the first ten tracks. When you list audio
-	# tracks here that don't exist, it doesn't seem to error out or anything.
+	# To make things easier when we rip foreign films, we just grab all the audio
+	# tracks. Otherwise it can be hard to grab just the native language of the
+	# movie and the native language of the user. Since grabbing all audio tracks
+	# doesn't appear to be an option with HandBrake, I just grab the first ten
+	# tracks. When you list audio tracks here that don't exist, it doesn't seem
+	# to error out or anything.
 	if profiledict['foreignaudio'] == 'true':
 		audiotracks = " -a 1,2,3,4,5,6,7,8,9,10 "
 	else:
 		audiotracks = ""
 
-	command = niceness + '"' + profiledict['handbrakeclipath'] + '" -i "' + f + '" -o "' + \
-		os.path.join(profiledict['destinationfolder'], os.path.basename(f).replace('_', ' ')) + \
-		'" -f mkv -d slower -N ' + profiledict['nativelanguage'] + \
-		' --native-dub -m -Z "High Profile" -s 1' + audiotracks + quality + \
-		blackandwhite + maxwidth + additionalhandbrakeargs
+	command = '{niceness} "{handbrakeclipath}" -i "{filename}" -o "{destination}"'\
+		' -f mkv -d slower -N {nativelanguage} --native-dub -m -Z "High Profile" -s'\
+		' 1{audiotracks}{quality}{blackandwhite}{maxwidth}{additionalhandbrakeargs}'\
+		.format(niceness = niceness, handbrakeclipath = profiledict['handbrakeclipath'],
+		filename = f, destination = os.path.join(profiledict['destinationfolder'],
+		os.path.basename(f).replace('_', ' ')), nativelanguage = profiledict['nativelanguage'],
+		audiotracks = audiotracks, quality = quality, blackandwhite = blackandwhite,
+		maxwidth = maxwidth, additionalhandbrakeargs = additionalhandbrakeargs)
 
 	return command
 

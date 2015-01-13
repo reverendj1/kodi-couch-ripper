@@ -4,7 +4,7 @@ About:
 Like many others, I use Kodi and I like to rip my movies/TV shows to my library
 from DVDs and Blu-ray discs. I had been doing this with a few scripts and wanted
 to create a Kodi interface to make this a little smoother process. Couch Ripper
-is designed to do just that.
+is designed to do just that. This project is still very alpha.
 
 Pre-Requisites:
 Couch Ripper utilizes MakeMKV <http://www.makemkv.com/> and HandBrake
