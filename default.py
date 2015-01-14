@@ -74,7 +74,7 @@ def main(argv):
 	for f in filestoencode:
 		command = buildHandBrakeCLICommand(profiledict, f)
 		utils.log("{beginning} {encode}. {commandstr}: {command}".format(beginning =
-			utils.getString(30070), encode = utils.getString(30028), 
+			utils.getString(30070), encode = utils.getString(30028),
 			commandstr = utils.getString(30071),
 			command = command))
 		output = ""
@@ -93,11 +93,11 @@ def main(argv):
 
 	# 30065 == Notification
 	if profiledict['notifyafterencode'] == utils.getStringLow(30065):
-		utils.showNotification("{rip} {completedsuccessfully".format(rip =
-			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
+		utils.showNotification("{encode} {completedsuccessfully}".format(encode =
+			utils.getString(30028), completedsuccessfully = utils.getString(30058)))
 	elif profiledict['notifyafterencode'] == utils.getStringLow(30066):
-		utils.showOK("{rip} {completedsuccessfully".format(rip =
-			utils.getString(30027), completedsuccessfully = utils.getString(30058)))
+		utils.showOK("{encode} {completedsuccessfully}".format(encode =
+			utils.getString(30028), completedsuccessfully = utils.getString(30058)))
 
 	return 0
 
