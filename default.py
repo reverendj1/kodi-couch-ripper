@@ -74,7 +74,8 @@ def main(argv):
 	for f in filestoencode:
 		command = buildHandBrakeCLICommand(profiledict, f)
 		utils.log("{beginning} {encode}. {commandstr}: {command}".format(beginning =
-			getString(30070), encode = getString(30028), commandstr = getString(30071),
+			utils.getString(30070), encode = utils.getString(30028), 
+			commandstr = utils.getString(30071),
 			command = command))
 		output = ""
 		try:
@@ -82,7 +83,7 @@ def main(argv):
 		except subprocess.CalledProcessError, e:
 			if "Encode done!" not in e.output:
 				utils.exitFailed("HandBrake {failed}".format(failed =
-					getString(30059)), e.output)
+					utils.getString(30059)), e.output)
 		if profiledict['cleanuptempdir'] == 'true':
 			os.remove(f)
 
