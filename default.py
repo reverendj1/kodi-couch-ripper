@@ -134,6 +134,7 @@ def getDefaults():
         utils.getSettingLow('defaultnotifyafterencode'),
         'defaultcleanuptempdir': utils.getSettingLow('defaultcleanuptempdir'),
         'defaultblackandwhite': utils.getSettingLow('defaultblackandwhite'),
+        'defaultdriveid': utils.getSetting('defaultdriveid'),
         'defaultadditionalhandbrakeargs':
         utils.getSetting('defaultadditionalhandbrakeargs')}
     return defaultsettings
@@ -191,6 +192,8 @@ def getProfile(defaultsettings, profilenum):
                     utils.getSettingLow(profile + 'cleanuptempdir'),
                     'blackandwhite':
                     utils.getSettingLow(profile + 'blackandwhite'),
+                    'driveid':
+                    utils.getSetting(profile + 'driveid'),
                     'additionalhandbrakeargs':
                     utils.getSetting(profile + 'additionalhandbrakeargs')}
             for key, value in profiledict.iteritems():
@@ -248,6 +251,11 @@ def verifyProfile(profiledict):
                 '{invalid} {mintitlelength}. '.format(
                 invalid = utils.getString(30056),
                 mintitlelength = utils.getString(30022)))
+    if not profiledict['driveid'].isdigit():
+        errors = errors + utils.settingsError(
+                '{invalid} {driveid}. '.format(
+                invalid = utils.getString(30056),
+                driveid = utils.getString(30068)))
 
     # List of valid ISO-639.2 language names.
     # From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This is the
@@ -383,12 +391,13 @@ def buildMakeMKVConCommand(profiledict):
 
     mintitlelength = str(int(profiledict['mintitlelength']) * 60)
 
-    command = ('{niceness} "{makemkvpath}" mkv --decrypt disc:0 all '
+    command = ('{niceness} "{makemkvpath}" mkv --decrypt disc:{driveid} all '
             '--minlength={mintitlelength} "{tempfolder}"'.format(
-            niceness=niceness,
-            makemkvpath=profiledict['makemkvpath'],
-            mintitlelength=['mintitlelength'],
-            tempfolder=['tempfolder']))
+            niceness = niceness,
+            makemkvpath = profiledict['makemkvpath'],
+            driveid = profiledict['driveid'],
+            mintitlelength = mintitlelength,
+            tempfolder = profiledict['tempfolder']))
     return command
 
 def buildHandBrakeCLICommand(profiledict, f):
