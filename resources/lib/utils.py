@@ -28,7 +28,7 @@ def showNotification(message):
             encode(getString(30010)),
             encode(message),
             time=4000,
-            icon=xbmc.translatePath('{addonpath} /icon.png'.format(
+            icon=xbmc.translatePath('{addonpath}/icon.png'.format(
             addonpath = __Addon.getAddonInfo('path'))))
 
 def showOK(message):
