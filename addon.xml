@@ -11,7 +11,7 @@
 		<description>Couch Ripper uses MakeMKV and Handbrake to rip movies into Kodi at the press of a button.</description>
 		<disclaimer>Since Couch Ripper makes use of MakeMKV and Handbrake, those must be installed for it to work.</disclaimer>
 		<language></language>
-		<platform>linux</platform>
+		<platform>all</platform>
 		<license></license>
 		<forum></forum>
 		<website></website>
