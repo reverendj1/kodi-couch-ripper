@@ -17,11 +17,11 @@ def main(argv):
     if not makemkvpath:
         # Please Set MakeMKVCon Path
         utils.exitFailed('{pleaseset} {pathtomakemkvcon}'.format(
-                pleaseset = getString(30072),
-                pathtomakemkvcon = getString(30016)),
+                pleaseset = utils.getString(30072),
+                pathtomakemkvcon = utils.getString(30016)),
                 '{pleaseset} {pathtomakemkvcon}'.format(
-                pleaseset = getString(30072),
-                pathtomakemkvcon = getString(30016)))
+                pleaseset = utils.getString(30072),
+                pathtomakemkvcon = utils.getString(30016)))
     command = makemkvpath + ' info list -r'
     try:
         output = subprocess.check_output(

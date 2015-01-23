@@ -43,9 +43,8 @@ def main(argv):
             rip = utils.getString(30027),
             commandstr = utils.getString(30071),
             command = command))
-    output = ''
     try:
-        output = subprocess.check_output(
+        subprocess.check_output(
                 command, stderr=subprocess.STDOUT, shell=True)
     # For some reason, it seems that this always exits with a non-zero
     # status, so I'm just checking the output for success.
@@ -86,9 +85,8 @@ def main(argv):
                 encode = utils.getString(30028),
                 commandstr = utils.getString(30071),
                 command = command))
-        output = ''
         try:
-            output = subprocess.check_output(
+            subprocess.check_output(
                     command, stderr=subprocess.STDOUT, shell=True)
         except subprocess.CalledProcessError, e:
             if 'Encode done!' not in e.output:
@@ -220,12 +218,12 @@ def verifyProfile(profiledict):
         errors = errors + utils.settingsError(
                 '{couldnotfind} {tempfolder}. '.format(
                 couldnotfind = utils.getString(30052),
-                tempfolder = profiledict[tempfolder]))
+                tempfolder = profiledict['tempfolder']))
     if not os.path.isdir(profiledict['destinationfolder']):
         errors = errors + utils.settingsError(
                 '{couldnotfind} {destinationfolder}. '.format(
                 couldnotfind = utils.getString(30052),
-                destinationfolder = profiledict[destinationfolder]))
+                destinationfolder = profiledict['destinationfolder']))
     # 30013 == High, 30015 == Low, 30019 == Normal
     if (profiledict['niceness'] != utils.getStringLow(30013) and
             profiledict['niceness'] != utils.getStringLow(30015) and

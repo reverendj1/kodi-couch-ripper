@@ -50,7 +50,7 @@ def showSelectDialog(heading, selections):
 def settingsError(message):
     log('{message} {pleasecheckyoursettings}'.format(
         message = message,
-        pleasecheckyoursettings = utils.getString(30053)),
+        pleasecheckyoursettings = getString(30053)),
         xbmc.LOGERROR)
     return message
 
