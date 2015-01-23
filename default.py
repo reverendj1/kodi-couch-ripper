@@ -7,6 +7,7 @@ import resources.lib.utils as utils
 import platform
 import subprocess
 
+
 def main(argv):
 
     params = getParams(argv)
@@ -112,6 +113,7 @@ def main(argv):
 
     return 0
 
+
 def getDefaults():
     # Get all the profile's settings. I know there has to be a better
     # way to do profiles, but this should work.
@@ -138,6 +140,7 @@ def getDefaults():
         'defaultadditionalhandbrakeargs':
         utils.getSetting('defaultadditionalhandbrakeargs')}
     return defaultsettings
+
 
 def getProfile(defaultsettings, profilenum):
     if profilenum == '':
@@ -197,9 +200,10 @@ def getProfile(defaultsettings, profilenum):
                     'additionalhandbrakeargs':
                     utils.getSetting(profile + 'additionalhandbrakeargs')}
             for key, value in profiledict.iteritems():
-                if ( value == 'default' or value == ''):
+                if (value == 'default' or value == ''):
                     profiledict[key] = defaultsettings['default' + key]
     return profiledict
+
 
 def verifyProfile(profiledict):
     # Let's verify all of our settings.
@@ -223,25 +227,25 @@ def verifyProfile(profiledict):
                 couldnotfind = utils.getString(30052),
                 destinationfolder = profiledict[destinationfolder]))
     # 30013 == High, 30015 == Low, 30019 == Normal
-    if ( profiledict['niceness'] != utils.getStringLow(30013) and
+    if (profiledict['niceness'] != utils.getStringLow(30013) and
             profiledict['niceness'] != utils.getStringLow(30015) and
-            profiledict['niceness'] != utils.getStringLow(30019) ):
+            profiledict['niceness'] != utils.getStringLow(30019)):
         errors = errors + utils.settingsError(
                 '{invalid} {niceness}. '.format(
                 invalid = utils.getString(30056),
                 niceness = utils.getString(30018)))
     # 30042 == 1080, 30043 == 720, 30044 == 480
-    if ( profiledict['resolution'] != utils.getStringLow(30042) and
+    if (profiledict['resolution'] != utils.getStringLow(30042) and
             profiledict['resolution'] != utils.getStringLow(30043) and
-            profiledict['resolution'] != utils.getStringLow(30044) ):
+            profiledict['resolution'] != utils.getStringLow(30044)):
         errors = errors + utils.settingsError(
                 '{invalid} {resolution}. '.format(
                 invalid = utils.getString(30056),
                 resolution = utils.getString(30011)))
     # 30013 == High, 30015 == Low, 30014 == Medium
-    if ( profiledict['quality'] != utils.getStringLow(30013) and
+    if (profiledict['quality'] != utils.getStringLow(30013) and
             profiledict['quality'] != utils.getStringLow(30014) and
-            profiledict['quality'] != utils.getStringLow(30015) ):
+            profiledict['quality'] != utils.getStringLow(30015)):
         errors = errors + utils.settingsError(
                 '{invalid} {quality}. '.format(
                 invalid = utils.getString(30056),
@@ -258,8 +262,8 @@ def verifyProfile(profiledict):
                 driveid = utils.getString(30068)))
 
     # List of valid ISO-639.2 language names.
-    # From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This is the
-    # format that HandBrake requires language arguments to be in.
+    # From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This is
+    # the format that HandBrake requires language arguments to be in.
     validlanguages = [
             'all', 'aar', 'abk', 'ace', 'ach', 'ada', 'ady', 'afa', 'afh',
             'afr', 'ain', 'aka', 'akk', 'alb', 'ale', 'alg', 'alt', 'amh',
@@ -315,39 +319,39 @@ def verifyProfile(profiledict):
             'vie', 'vol', 'vot', 'wak', 'wal', 'war', 'was', 'wel', 'wen',
             'wln', 'wol', 'xal', 'xho', 'yao', 'yap', 'yid', 'yor', 'ypk',
             'zap', 'zbl', 'zen', 'zgh', 'zha', 'znd', 'zul', 'zun', 'zxx',
-            'zza' ]
+            'zza']
 
     if profiledict['nativelanguage'] not in validlanguages:
         errors = errors + utils.settingsError(
                 '{invalid} {nativelanguage}. '.format(
                 invalid = utils.getString(30056),
                 nativelanguage = utils.getString(30023)))
-    if ( profiledict['foreignaudio'] != 'true' and
-            profiledict['foreignaudio'] != 'false' ):
+    if (profiledict['foreignaudio'] != 'true' and
+            profiledict['foreignaudio'] != 'false'):
         errors = errors + utils.settingsError(
                 '{invalid} {foreignaudio}. '.format(
                 invalid = utils.getString(30056),
                 foreignaudio = utils.getString(30024)))
-    if ( profiledict['encodeafterrip'] != 'true' and
-            profiledict['encodeafterrip'] != 'false' ):
+    if (profiledict['encodeafterrip'] != 'true' and
+            profiledict['encodeafterrip'] != 'false'):
         errors = errors + utils.settingsError(
                 '{invalid} {encodeafterrip}. '.format(
                 invalid = utils.getString(30056),
                 encodeafterrip = utils.getString(30025)))
-    if ( profiledict['cleanuptempdir'] != 'true' and
-            profiledict['cleanuptempdir'] != 'false' ):
+    if (profiledict['cleanuptempdir'] != 'true' and
+            profiledict['cleanuptempdir'] != 'false'):
         errors = errors + utils.settingsError(
                 '{invalid} {cleanuptempdir}. '.format(
                 invalid = utils.getString(30056),
                 cleanuptempdir = utils.getString(30030)))
-    if ( profiledict['blackandwhite'] != 'true' and
-            profiledict['blackandwhite'] != 'false' ):
+    if (profiledict['blackandwhite'] != 'true' and
+            profiledict['blackandwhite'] != 'false'):
         errors = errors + utils.settingsError(
                 '{invalid} {blackandwhite}. '.format(
                 invalid = utils.getString(30056),
                 blackandwhite = utils.getString(30060)))
     # 30027 == Rip, 30028 == Encode, 30029 == Never
-    if ( profiledict['ejectafter'] != utils.getStringLow(30027) and
+    if (profiledict['ejectafter'] != utils.getStringLow(30027) and
             profiledict['ejectafter'] != utils.getStringLow(30028) and
             profiledict['ejectafter'] != utils.getStringLow(30029)):
         errors = errors + utils.settingsError(
@@ -355,14 +359,14 @@ def verifyProfile(profiledict):
                 invalid = utils.getString(30056),
                 ejectafter = utils.getString(30026)))
     # 30065 == Notification,
-    if ( profiledict['notifyafterrip'] != utils.getStringLow(30065) and
+    if (profiledict['notifyafterrip'] != utils.getStringLow(30065) and
             profiledict['notifyafterrip'] != utils.getStringLow(30066) and
             profiledict['notifyafterrip'] != utils.getStringLow(30067)):
         errors = errors + utils.settingsError(
                 '{invalid} {notifyafterrip}. '.format(
                 invalid = utils.getString(30056),
                 notifyafterrip = utils.getString(30049)))
-    if ( profiledict['notifyafterencode'] != utils.getStringLow(30065) and
+    if (profiledict['notifyafterencode'] != utils.getStringLow(30065) and
             profiledict['notifyafterencode'] != utils.getStringLow(30066) and
             profiledict['notifyafterencode'] != utils.getStringLow(30067)):
         errors = errors + utils.settingsError(
@@ -372,6 +376,7 @@ def verifyProfile(profiledict):
 
     if errors:
         utils.exitFailed(errors, errors)
+
 
 def buildMakeMKVConCommand(profiledict):
     niceness = ''
@@ -399,6 +404,7 @@ def buildMakeMKVConCommand(profiledict):
             mintitlelength = mintitlelength,
             tempfolder = profiledict['tempfolder']))
     return command
+
 
 def buildHandBrakeCLICommand(profiledict, f):
     niceness = ''
@@ -467,6 +473,7 @@ def buildHandBrakeCLICommand(profiledict, f):
             additionalhandbrakeargs = additionalhandbrakeargs))
 
     return command
+
 
 def getParams(argv):
     param = {}

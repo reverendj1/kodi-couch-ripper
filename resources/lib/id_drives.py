@@ -3,6 +3,7 @@ import subprocess
 import urlparse
 import sys
 
+
 def main(argv):
 
     params = getParams(argv)
@@ -41,7 +42,7 @@ def main(argv):
             if drive[5] != '""':
                 gooddrives = '{gooddrives} {drivenum}: {discname} '.format(
                         drivenum = drive[0].split(':')[1],
-                        discname = drive[5].replace('"',''))
+                        discname = drive[5].replace('"', ''))
 
     if gooddrives == '':
         # 30073 == Please Put a Disc in the Drive to Identify
@@ -49,6 +50,7 @@ def main(argv):
     else:
         utils.showOK(gooddrives)
     return 0
+
 
 def getParams(argv):
     param = {}
