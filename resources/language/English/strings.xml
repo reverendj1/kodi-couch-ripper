@@ -64,5 +64,7 @@
 	<string id="30071">Command</string>
 	<string id="30072">Please Set</string>
 	<string id="30073">Please Put a Disc in the Drive to Identify</string>
+	<string id="30074">Your temporary MakeMKV key has expired. Please update it.</string>
+	<string id="30075">Your version of MakeMKV is too old. Please update it.</string>
 
 </strings>

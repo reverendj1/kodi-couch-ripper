@@ -20,7 +20,7 @@ license. During the beta, you can get the current license from
 <http://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053> which needs to be
 updated every 60 days. You can also show your support and purchase a full
 license (which will not change through versions or updates) for the software
-on their website <http://www.makemkv.com/>.
+on their website <http://makemkv.com/buy/>.
 
 Installation - Ubuntu:
 sudo add-apt-repository ppa:heyarje/makemkv-beta

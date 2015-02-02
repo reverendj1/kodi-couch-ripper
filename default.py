@@ -50,6 +50,18 @@ def main(argv):
     # status, so I'm just checking the output for success.
     except subprocess.CalledProcessError, e:
         if 'Copy complete.' not in e.output:
+            if 'Your temporary key has expired and was removed' in e.output:
+                utils.exitFailed('MakeMKV {failed}'.format(
+                        failed = utils.getString(30059)),
+                        # 30074 = Your temporary MakeMKV key has expired.
+                        # Please update it
+                        utils.getString(30074))
+            if 'This application version is too old' in e.output:
+                utils.exitFailed('MakeMKV {failed}'.format(
+                        failed = utils.getString(30059)),
+                        # 30075 = Your version of MakeMKV is too old. Please
+                        # update it.
+                        utils.getString(30075))
             utils.exitFailed('MakeMKV {failed}'.format(
                     failed = utils.getString(30059)), e.output)
 
