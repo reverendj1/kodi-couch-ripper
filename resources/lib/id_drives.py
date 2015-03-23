@@ -22,7 +22,7 @@ def main(argv):
                 '{pleaseset} {pathtomakemkvcon}'.format(
                 pleaseset = utils.getString(30072),
                 pathtomakemkvcon = utils.getString(30016)))
-    command = makemkvpath + ' info list -r'
+    command = '"{makemkvpath}" info list -r'.format(makemkvpath=makemkvpath)
     try:
         output = subprocess.check_output(
                 command, stderr=subprocess.STDOUT, shell=True)
@@ -41,6 +41,7 @@ def main(argv):
         if len(drive) >= 7:
             if drive[5] != '""':
                 gooddrives = '{gooddrives} {drivenum}: {discname} '.format(
+                        gooddrives = gooddrives,
                         drivenum = drive[0].split(':')[1],
                         discname = drive[5].replace('"', ''))
 

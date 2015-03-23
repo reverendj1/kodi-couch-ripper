@@ -395,9 +395,9 @@ def buildMakeMKVConCommand(profiledict):
             profiledict['niceness'] == utils.getString(30015).lower()):
         if (platform.system() == 'Windows'):
             if (profiledict['niceness'] == utils.getStringLow(30013)):
-                niceness = 'start /wait /b /high '
+                niceness = 'start /wait /b /high "" '
             else:
-                niceness = 'start /wait /b /low '
+                niceness = 'start /wait /b /low "" '
         else:
             if (profiledict['niceness'] == utils.getStringLow(30013)):
                 niceness = 'nice -n -19 '
@@ -412,7 +412,7 @@ def buildMakeMKVConCommand(profiledict):
             makemkvpath = profiledict['makemkvpath'],
             driveid = profiledict['driveid'],
             mintitlelength = mintitlelength,
-            tempfolder = profiledict['tempfolder']))
+            tempfolder = profiledict['tempfolder'].rstrip('\\')))
     return command
 
 
@@ -423,9 +423,9 @@ def buildHandBrakeCLICommand(profiledict, f):
             or profiledict['niceness'] == utils.getString(30015).lower()):
         if (platform.system() == 'Windows'):
             if (profiledict['niceness'] == utils.getStringLow(30013)):
-                niceness = 'start /wait /b /high '
+                niceness = 'start /wait /b /high "" '
             else:
-                niceness = 'start /wait /b /low '
+                niceness = 'start /wait /b /low "" '
         else:
             if (profiledict['niceness'] == utils.getStringLow(30013)):
                 niceness = 'nice -n -19 '
@@ -466,7 +466,7 @@ def buildHandBrakeCLICommand(profiledict, f):
     else:
         audiotracks = ''
 
-    command = ('{niceness} "{handbrakeclipath}" -i "{filename}" -o '
+    command = ('{niceness}"{handbrakeclipath}" -i "{filename}" -o '
             '"{destination}" -f mkv -d slower -N {nativelanguage} '
             '--native-dub -m -Z "High Profile" -s 1{audiotracks}{quality}'
             '{blackandwhite}{maxwidth}{additionalhandbrakeargs}'.format(
