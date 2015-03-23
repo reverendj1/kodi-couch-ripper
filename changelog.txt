@@ -1,7 +1,9 @@
-v0.1.1
+0.1.2
+  - Version Bump
+0.1.1
   Bug Fixes:
       - Fixed issue with CPU priority on Windows
       - Fixed error identifying drives
 
-v0.1.0
-- Initial Release
+0.1.0
+  - Initial Release
