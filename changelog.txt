@@ -1,6 +1,7 @@
 v0.1.1
-- Bugfix: Fixed issue with CPU priority on Windows
-- Bugfix: Fixed error identifying drives
+  Bug Fixes:
+      - Fixed issue with CPU priority on Windows
+      - Fixed error identifying drives
 
 v0.1.0
 - Initial Release
