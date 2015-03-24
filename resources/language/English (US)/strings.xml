@@ -52,8 +52,8 @@
 	<string id="30059">Failed!</string>
 	<string id="30060">Black and White</string>
 	<string id="30061">Notify After Encode</string>
-	<string id="30062">Show MakeMKVCon Command</string>
-	<string id="30063">Show HandBrakeCLI Command</string>
+	<string id="30062">Show MakeMKVCon/Rip Command</string>
+	<string id="30063">Show HandBrakeCLI/Encode Command</string>
 	<string id="30064">Additional HandBrakeCLI Arguments</string>
 	<string id="30065">Notification</string>
 	<string id="30066">Dialog</string>
@@ -64,5 +64,11 @@
 	<string id="30071">Command</string>
 	<string id="30072">Please Set</string>
 	<string id="30073">Please Put a Disc in the Drive to Identify</string>
-
+	<string id="30074">Your temporary MakeMKV key has expired. Please update it.</string>
+	<string id="30075">Your version of MakeMKV is too old. Please update it.</string>
+	<string id="30076">Custom Rip Command</string>
+	<string id="30077">Custom Encode Command</string>
+	<string id="30078">Use Custom Rip Command</string>
+	<string id="30079">Use Custom Encode Command</string>
+	<string id="30080">There Are No Profiles Enabled!</string>
 </strings>

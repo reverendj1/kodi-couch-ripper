@@ -7,9 +7,10 @@ and wanted to create a Kodi interface to make this a little smoother process.
 Couch Ripper is designed to do just that. This project is still very alpha.
 
 Pre-Requisites:
-Couch Ripper utilizes MakeMKV <http://www.makemkv.com/> and HandBrake
-<https://handbrake.fr/> to do the actual ripping and encoding of DVDs and
-Blu-rays, so these must be installed prior to it working.
+By default, Couch Ripper utilizes MakeMKV <http://www.makemkv.com/> and
+HandBrake <https://handbrake.fr/> to do the actual ripping and encoding of DVDs
+and Blu-rays, so these must be installed prior to it working, unless you
+specify different commands for encoding and ripping.
 
 MakeMKV:
 MakeMKV is the software responsible for ripping, decrypting and encoding the
@@ -143,12 +144,24 @@ Additional HandBrakeCLI
 Identify Drives............You can use this to find out the numerical ID for
                            your optical drives. Just make sure to have a disc
                            in the drive(s) you want to ID.
-Show MakeMKVCon Command....This just displays the MakeMKVCon command that will
-                           be run. Useful when debugging or using advanced
-                           options.
-Show HandBrakeCLI Command..This just displays the MakeMKVCon command that will
-                           be run. Useful when debugging, using advanced
-                           options, or if you want to schedule encodings.
+Use Custom Rip Command.....Enables the use of a completely custom rip command.
+Custom Rip Command.........The rip command that will be used instead of
+                           MakeMKV. It is not verified in any way, and you are
+                           on your own if you choose to use this.
+Use Custom Encode Command..Enables the use of a completely custom encode
+                           command.
+Custom Encode Command......The encode command that will be used instead of
+                           HandBrakeCLI. It is not verified in any way, and you
+                           are on your own if you choose to use this.
+Show MakeMKVCon/Rip
+..Command..................This just displays the MakeMKVCon (or custom rip)
+                           command that will be run. Useful when debugging or
+                           using advanced options.
+Show HandBrakeCLI/Encode
+..Command..................This just displays the MakeMKVCon (or custom encode
+                           command that will be run. Useful when debugging,
+                           using advanced options, or if you want to schedule
+                           encodings.
 
 
 Usage:

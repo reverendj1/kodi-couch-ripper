@@ -1,273 +1,317 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="30050">
-		<setting label="30016" type="executable" id="defaultmakemkvpath"/>
-		<setting label="30017" type="executable" id="defaulthandbrakeclipath"/>
-		<setting label="30020" type="folder" id="defaulttempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="defaultdestinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="defaultmakemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="defaulthandbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="defaulttempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="defaultdestinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="defaultniceness" lvalues="30013|30019|30015" default="30015"/>
-		<setting label="30011" type="labelenum" id="defaultresolution" lvalues="30042|30043|30044" default="30042"/>
-		<setting label="30012" type="labelenum" id="defaultquality" lvalues="30013|30014|30015" default="30013"/>
-		<setting label="30022" type="number" id="defaultmintitlelength" default="45"/>
-		<setting label="30023" type="text" id="defaultnativelanguage" default="eng"/>
-		<setting label="30024" type="bool" id="defaultforeignaudio" default="false"/>
+		<setting label="30011" type="labelenum" id="defaultresolution" lvalues="30042|30043|30044" visible="eq(15,false)" default="30042"/>
+		<setting label="30012" type="labelenum" id="defaultquality" lvalues="30013|30014|30015" visible="eq(14,false)" default="30013"/>
+		<setting label="30022" type="number" id="defaultmintitlelength" visible="eq(11,false)" default="45"/>
+		<setting label="30023" type="text" id="defaultnativelanguage" default="eng" visible="eq(12,false)"/>
+		<setting label="30024" type="bool" id="defaultforeignaudio" default="false" visible="eq(11,false)"/>
 		<setting label="30025" type="bool" id="defaultencodeafterrip" default="true"/>
 		<setting label="30026" type="labelenum" id="defaultejectafter" lvalues="30027|30028|30029" default="30028"/>
 		<setting label="30049" type="labelenum" id="defaultnotifyafterrip" lvalues="30065|30066|30067" default="30065"/>
 		<setting label="30061" type="labelenum" id="defaultnotifyafterencode" lvalues="30065|30066|30067" default="30065"/>
-		<setting label="30030" type="bool" id="defaultcleanuptempdir" default="true"/>
-		<setting label="30060" type="bool" id="defaultblackandwhite" default="false"/>
-		<setting label="30068" type="number" id="defaultdriveid" default="0"/>
-		<setting label="30064" type="text" id="defaultadditionalhandbrakeargs" default=""/>
+		<setting label="30030" type="bool" id="defaultcleanuptempdir" visible="eq(4,false)" default="true"/>
+		<setting label="30060" type="bool" id="defaultblackandwhite" visible="eq(2,false)" default="false"/>
+		<setting label="30068" type="number" id="defaultdriveid" visible="eq(2,false)" default="0"/>
+		<setting label="30064" type="text" id="defaultadditionalhandbrakeargs" visible="eq(3,false)" default=""/>
+		<setting label="30078" type="bool" id="defaultenablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="defaultcustomripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="defaultenablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="defaultcustomencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=default)"/>
 	</category>
 	<category label="30031">
 		<setting label="30047" type="text" id="profile1prettyname" default="Default Profile"/>
 		<setting label="30048" type="bool" id="profile1enabled" default="true"/>
-		<setting label="30016" type="executable" id="profile1makemkvpath"/>
-		<setting label="30017" type="executable" id="profile1handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile1tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile1destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile1makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile1handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile1tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile1destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile1niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile1resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile1quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile1resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile1quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile1mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile1nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile1foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile1foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile1encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile1ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile1notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile1notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile1cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile1blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile1driveid" default=""/>
-		<setting label="30064" type="text" id="profile1additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile1cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile1blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile1driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile1additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile1)"/>
+		<setting label="30078" type="bool" id="profile1enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile1customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile1enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile1customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile1)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile1)" />
 	</category>
 	<category label="30032">
 		<setting label="30047" type="text" id="profile2prettyname" default="Profile 2"/>
 		<setting label="30048" type="bool" id="profile2enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile2makemkvpath"/>
-		<setting label="30017" type="executable" id="profile2handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile2tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile2destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile2makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile2handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile2tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile2destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile2niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile2resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile2quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile2resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile2quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile2mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile2nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile2foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile2foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile2encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile2ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile2notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile2notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile2cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile2blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile2driveid" default=""/>
-		<setting label="30064" type="text" id="profile2additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile2cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile2blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile2driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile2additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile2)"/>
+		<setting label="30078" type="bool" id="profile2enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile2customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile2enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile2customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile2)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile2)" />
 	</category>
 	<category label="30033">
 		<setting label="30047" type="text" id="profile3prettyname" default="Profile 3"/>
 		<setting label="30048" type="bool" id="profile3enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile3makemkvpath"/>
-		<setting label="30017" type="executable" id="profile3handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile3tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile3destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile3makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile3handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile3tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile3destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile3niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile3resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile3quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile3resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile3quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile3mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile3nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile3foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile3foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile3encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile3ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile3notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile3notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile3cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile3blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile3driveid" default=""/>
-		<setting label="30064" type="text" id="profile3additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile3cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile3blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile3driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile3additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile3)"/>
+		<setting label="30078" type="bool" id="profile3enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile3customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile3enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile3customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile3)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile3)" />
 	</category>
 	<category label="30034">
 		<setting label="30047" type="text" id="profile4prettyname" default="Profile 4"/>
 		<setting label="30048" type="bool" id="profile4enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile4makemkvpath"/>
-		<setting label="30017" type="executable" id="profile4handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile4tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile4destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile4makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile4handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile4tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile4destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile4niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile4resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile4quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile4resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile4quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile4mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile4nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile4foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile4foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile4encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile4ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile4notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile4notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile4cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile4blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile4driveid" default=""/>
-		<setting label="30064" type="text" id="profile4additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile4cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile4blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile4driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile4additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile4)"/>
+		<setting label="30078" type="bool" id="profile4enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile4customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile4enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile4customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile4)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile4)" />
 	</category>
 	<category label="30035">
 		<setting label="30047" type="text" id="profile5prettyname" default="Profile 5"/>
 		<setting label="30048" type="bool" id="profile5enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile5makemkvpath"/>
-		<setting label="30017" type="executable" id="profile5handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile5tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile5destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile5makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile5handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile5tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile5destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile5niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile5resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile5quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile5resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile5quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile5mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile5nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile5foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile5foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile5encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile5ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile5notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile5notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile5cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile5blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile5driveid" default=""/>
-		<setting label="30064" type="text" id="profile5additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile5cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile5blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile5driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile5additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile5)"/>
+		<setting label="30078" type="bool" id="profile5enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile5customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile5enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile5customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile5)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile5)" />
 	</category>
 	<category label="30036">
 		<setting label="30047" type="text" id="profile6prettyname" default="Profile 6"/>
 		<setting label="30048" type="bool" id="profile6enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile6makemkvpath"/>
-		<setting label="30017" type="executable" id="profile6handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile6tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile6destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile6makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile6handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile6tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile6destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile6niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile6resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile6quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile6resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile6quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile6mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile6nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile6foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile6foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile6encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile6ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile6notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile6notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile6cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile6blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile6driveid" default=""/>
-		<setting label="30064" type="text" id="profile6additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile6cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile6blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile6driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile6additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile6)"/>
+		<setting label="30078" type="bool" id="profile6enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile6customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile6enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile6customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile6)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile6)" />
 	</category>
 	<category label="30037">
 		<setting label="30047" type="text" id="profile7prettyname" default="Profile 7"/>
 		<setting label="30048" type="bool" id="profile7enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile7makemkvpath"/>
-		<setting label="30017" type="executable" id="profile7handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile7tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile7destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile7makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile7handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile7tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile7destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile7niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile7resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile7quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile7resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile7quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile7mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile7nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile7foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile7foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile7encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile7ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile7notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile7notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile7cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile7blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile7driveid" default=""/>
-		<setting label="30064" type="text" id="profile7additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile7cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile7blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile7driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile7additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile7)"/>
+		<setting label="30078" type="bool" id="profile7enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile7customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile7enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile7customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile7)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile7)" />
 	</category>
 	<category label="30038">
 		<setting label="30047" type="text" id="profile8prettyname" default="Profile 8"/>
 		<setting label="30048" type="bool" id="profile8enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile8makemkvpath"/>
-		<setting label="30017" type="executable" id="profile8handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile8tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile8destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile8makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile8handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile8tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile8destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile8niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile8resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile8quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile8resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile8quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile8mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile8nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile8foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile8foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile8encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile8ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile8notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile8notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile8cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile8blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile8driveid" default=""/>
-		<setting label="30064" type="text" id="profile8additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile8cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile8blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile8driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile8additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile8)"/>
+		<setting label="30078" type="bool" id="profile8enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile8customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile8enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile8customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile8)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile8)" />
 	</category>
 	<category label="30039">
 		<setting label="30047" type="text" id="profile9prettyname" default="Profile 9"/>
 		<setting label="30048" type="bool" id="profile9enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile9makemkvpath"/>
-		<setting label="30017" type="executable" id="profile9handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile9tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile9destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile9makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile9handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile9tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile9destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile9niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile9resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile9quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile9resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile9quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile9mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile9nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile9foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile9foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile9encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile9ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile9notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile9notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile9cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile9blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile9driveid" default=""/>
-		<setting label="30064" type="text" id="profile9additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile9cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile9blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile9driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile9additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile9)"/>
+		<setting label="30078" type="bool" id="profile9enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile9customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile9enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile9customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile9)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile9)" />
 	</category>
 	<category label="30040">
 		<setting label="30047" type="text" id="profile10prettyname" default="Profile 10"/>
 		<setting label="30048" type="bool" id="profile10enabled" default="false"/>
-		<setting label="30016" type="executable" id="profile10makemkvpath"/>
-		<setting label="30017" type="executable" id="profile10handbrakeclipath"/>
-		<setting label="30020" type="folder" id="profile10tempfolder" option="writable"/>
-		<setting label="30021" type="folder" id="profile10destinationfolder" option="writable"/>
+		<setting label="30016" type="executable" id="profile10makemkvpath" visible="eq(18,false)"/>
+		<setting label="30017" type="executable" id="profile10handbrakeclipath" visible="eq(19,false)"/>
+		<setting label="30020" type="folder" id="profile10tempfolder" option="writable" visible="eq(16,false) + eq(18,false)"/>
+		<setting label="30021" type="folder" id="profile10destinationfolder" option="writable" visible="eq(17,false)"/>
 		<setting label="30018" type="labelenum" id="profile10niceness" lvalues="30041|30013|30019|30015" default="30041"/>
-		<setting label="30011" type="labelenum" id="profile10resolution" lvalues="30041|30042|30043|30044" default="30041"/>
-		<setting label="30012" type="labelenum" id="profile10quality" lvalues="30041|30013|30014|30015" default="30041"/>
+		<setting label="30011" type="labelenum" id="profile10resolution" lvalues="30041|30042|30043|30044" visible="eq(15,false)" default="30041"/>
+		<setting label="30012" type="labelenum" id="profile10quality" lvalues="30041|30013|30014|30015" visible="eq(14,false)" default="30041"/>
 		<setting label="30022" type="number" id="profile10mintitlelength" default=""/>
 		<setting label="30023" type="text" id="profile10nativelanguage" default=""/>
-		<setting label="30024" type="labelenum" id="profile10foreignaudio" lvalues="30041|30045|30046" default="30041"/>
+		<setting label="30024" type="labelenum" id="profile10foreignaudio" lvalues="30041|30045|30046" default="30041" visible="eq(11,false)"/>
 		<setting label="30025" type="labelenum" id="profile10encodeafterrip" lvalues="30041|30045|30046" default="30041"/>
 		<setting label="30026" type="labelenum" id="profile10ejectafter" lvalues="30041|30027|30028|30029" default="30041"/>
 		<setting label="30049" type="labelenum" id="profile10notifyafterrip" lvalues="30041|30065|30066|30067" default="30041"/>
 		<setting label="30061" type="labelenum" id="profile10notifyafterencode" lvalues="30041|30065|30066|30067" default="30041"/>
-		<setting label="30030" type="labelenum" id="profile10cleanuptempdir" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30060" type="labelenum" id="profile10blackandwhite" lvalues="30041|30045|30046" default="30041"/>
-		<setting label="30068" type="number" id="profile10driveid" default=""/>
-		<setting label="30064" type="text" id="profile10additionalhandbrakeargs" default=""/>
+		<setting label="30030" type="labelenum" id="profile10cleanuptempdir" lvalues="30041|30045|30046" visible="eq(4,false)" default="30041"/>
+		<setting label="30060" type="labelenum" id="profile10blackandwhite" lvalues="30041|30045|30046" visible="eq(2,false)" default="30041"/>
+		<setting label="30068" type="number" id="profile10driveid" visible="eq(2,false)" default=""/>
+		<setting label="30064" type="text" id="profile10additionalhandbrakeargs" visible="eq(3,false)" default=""/>
 		<setting label="30069" type="action" action="RunScript($CWD/resources/lib/id_drives.py, profile=profile10)"/>
+		<setting label="30078" type="bool" id="profile10enablecustomripcommand" default="false"/>
+		<setting label="30076" type="text" id="profile10customripcommand" visible="eq(-1,true)" default=""/>
+		<setting label="30079" type="bool" id="profile10enablecustomencodecommand" default="false"/>
+		<setting label="30077" type="text" id="profile10customencodecommand" visible="eq(-1,true)" default=""/>
 		<setting label="30062" type="action" action="RunScript($CWD/default.py, getcommand=makemkvcon&amp;profile=profile10)" />
 		<setting label="30063" type="action" action="RunScript($CWD/default.py, getcommand=handbrakecli&amp;profile=profile10)" />
 	</category>
