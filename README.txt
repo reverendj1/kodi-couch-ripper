@@ -68,7 +68,8 @@ Path to HandBrakeCLI.......Required. Path to the HandbrakeCLI executable
                            (/usr/bin/HandBrakeCLI on Ubuntu)
 Temporary Folder...........Required. Path to temporary folder for initial
                            rips. This folder will need at least 60GB free to
-                           store them.
+                           store them. This folder should be dedicated to Couch
+                           Ripper, since anything in it can be deleted.
 Destination Folder.........Required. Path to where you want the final videos.
                            I do not suggest making this the same path as your
                            library, as the filenames will need cleanup.

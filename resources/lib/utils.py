@@ -27,6 +27,14 @@ def log(message, loglevel=xbmc.LOGNOTICE):
             level=loglevel)
 
 
+def logDebug(message, loglevel=xbmc.LOGDEBUG):
+    xbmc.log(encode('{couchripper}-{version} : {message}'.format(
+            couchripper = __addon_id__,
+            version = __Addon.getAddonInfo('version'),
+            message= message)),
+            level=loglevel)
+
+
 def showNotification(message):
     # 30010 == Couch Ripper
     xbmcgui.Dialog().notification(

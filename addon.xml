@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.couch_ripper" name="Couch Ripper" version="0.1.3" provider-name="John Wesorick">
+<addon id="script.couch_ripper" name="Couch Ripper" version="0.1.4" provider-name="John Wesorick">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>

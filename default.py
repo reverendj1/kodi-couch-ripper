@@ -35,6 +35,7 @@ def main(argv):
                     profiledict, profiledict['tempfolder']))
             return 0
 
+    utils.logDebug(profiledict)
     command = buildMakeMKVConCommand(profiledict)
 
     # Beginning Rip. Command:
@@ -44,7 +45,7 @@ def main(argv):
             commandstr = utils.getString(30071),
             command = command))
     try:
-        subprocess.check_output(
+        ripoutput = subprocess.check_output(
                 command, stderr=subprocess.STDOUT, shell=True)
     # For some reason, it seems that this always exits with a non-zero
     # status, so I'm just checking the output for success.
@@ -64,6 +65,7 @@ def main(argv):
                         utils.getString(30075))
             utils.exitFailed('MakeMKV {failed}'.format(
                     failed = utils.getString(30059)), e.output)
+    utils.logDebug(ripoutput)
 
     # Eject if we need to
     # 30027 == Rip
@@ -98,12 +100,13 @@ def main(argv):
                 commandstr = utils.getString(30071),
                 command = command))
         try:
-            subprocess.check_output(
+            encodeoutput = subprocess.check_output(
                     command, stderr=subprocess.STDOUT, shell=True)
         except subprocess.CalledProcessError, e:
             if 'Encode done!' not in e.output:
                 utils.exitFailed('HandBrake {failed}'.format(
                         failed = utils.getString(30059)), e.output)
+        utils.logDebug(encodeoutput)
         if profiledict['cleanuptempdir'] == 'true':
             os.remove(f)
 
@@ -152,7 +155,8 @@ def getDefaults():
         'defaultcustomripcommand': utils.getSetting('defaultcustomripcommand'),
         'defaultenablecustomencodecommand':
         utils.getSetting('defaultenablecustomencodecommand'),
-        'defaultcustomencodecommand': utils.getSetting('defaultcustomencodecommand'),
+        'defaultcustomencodecommand':
+        utils.getSetting('defaultcustomencodecommand'),
         'defaultadditionalhandbrakeargs':
         utils.getSetting('defaultadditionalhandbrakeargs')}
     return defaultsettings
@@ -176,6 +180,9 @@ def getProfile(defaultsettings, profilenum):
         profilename = validprofiles[profilenum]
     else:
         profilename = utils.getSetting(profilenum + 'prettyname')
+    if profilenum == -1:
+        # 30081 == Rip Cancelled
+        utils.exitFailed(utils.getString(30081), utils.getString(30081))
     profiledict = []
     for profile in ['profile1', 'profile2', 'profile3', 'profile4', 'profile5',
             'profile6', 'profile7', 'profile8', 'profile9', 'profile10']:
@@ -286,7 +293,13 @@ def verifyProfile(profiledict):
 
     if (profiledict['enablecustomripcommand'] == 'false' and
             profiledict['enablecustomencodecommand'] == 'false'):
-        if not os.path.isdir(profiledict['tempfolder']):
+        if os.path.isdir(profiledict['tempfolder']):
+            if not os.access(profiledict['tempfolder'], os.W_OK):
+                errors = errors + utils.settingsError(
+                    '{couldnotwriteto} {tempfolder}. '.format(
+                    couldnotwriteto = utils.getString(30082),
+                    tempfolder = profiledict['tempfolder']))
+        else:
             errors = errors + utils.settingsError(
                 '{couldnotfind} {tempfolder}. '.format(
                 couldnotfind = utils.getString(30052),
@@ -324,7 +337,13 @@ def verifyProfile(profiledict):
             errors = errors + utils.settingsError(
                     '{couldnotfind} HandBrakeCLI. '.format(
                     couldnotfind = utils.getString(30052)))
-        if not os.path.isdir(profiledict['destinationfolder']):
+        if os.path.isdir(profiledict['destinationfolder']):
+            if not os.access(profiledict['destinationfolder'], os.W_OK):
+                errors = errors + utils.settingsError(
+                    '{couldnotwriteto} {destinationfolder}. '.format(
+                    couldnotwriteto = utils.getString(30082),
+                    destinationfolder = profiledict['destinationfolder']))
+        else:
             errors = errors + utils.settingsError(
                     '{couldnotfind} {destinationfolder}. '.format(
                     couldnotfind = utils.getString(30052),
@@ -346,8 +365,8 @@ def verifyProfile(profiledict):
                     invalid = utils.getString(30056),
                     quality = utils.getString(30012)))
         # List of valid ISO-639.2 language names.
-        # From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This is
-        # the format that HandBrake requires language arguments to be in.
+        # From http://www.loc.gov/standards/iso639-2/ISO-639-2_8859-1.txt This
+        # is the format that HandBrake requires language arguments to be in.
         validlanguages = [
                 'all', 'aar', 'abk', 'ace', 'ach', 'ada', 'ady', 'afa', 'afh',
                 'afr', 'ain', 'aka', 'akk', 'alb', 'ale', 'alg', 'alt', 'amh',
