@@ -6,6 +6,7 @@ import glob
 import resources.lib.utils as utils
 import platform
 import subprocess
+import re
 
 
 def main(argv):
@@ -50,19 +51,31 @@ def main(argv):
     # For some reason, it seems that this always exits with a non-zero
     # status, so I'm just checking the output for success.
     except subprocess.CalledProcessError, e:
-        if 'Copy complete.' not in e.output:
+        if 'Copy complete.' in e.output:
+            # We'll check for an error which denote using FAT32 for the temp
+            # filesystem.
+            fatcheck = re.search( r"The size of output file '(.*)' may reach "
+                    "as much as (.*) while target filesystem has a file size "
+                    "limit of (.*)", output)
+            if fatcheck:
+                # 30083 = Temp folder cannot handle large files
+                # 30084 = This is usually caused by using FAT32 for storage.
+                utils.exitFailed(utils.getstring(30083),
+                        utils.getString(30083) + ' ' + utils.getString(30084))
+        else:
             if 'Your temporary key has expired and was removed' in e.output:
-                utils.exitFailed('MakeMKV {failed}'.format(
-                        failed = utils.getString(30059)),
-                        # 30074 = Your temporary MakeMKV key has expired.
-                        # Please update it
+                # 30074 = Your temporary MakeMKV key has expired. Please update
+                # it
+                utils.exitFailed(utils.getString(30074),
                         utils.getString(30074))
             if 'This application version is too old' in e.output:
-                utils.exitFailed('MakeMKV {failed}'.format(
-                        failed = utils.getString(30059)),
-                        # 30075 = Your version of MakeMKV is too old. Please
-                        # update it.
+                # 30075 = Your version of MakeMKV is too old. Please update it.
+                utils.exitFailed(utils.getString(30075),
                         utils.getString(30075))
+            if 'Failed to open disc' in e.output:
+                # 30085 = Failed to Open Disc
+                utils.exitFailed(utils.getString(30085),
+                        utils.getString(30085))
             utils.exitFailed('MakeMKV {failed}'.format(
                     failed = utils.getString(30059)), e.output)
     utils.logDebug(ripoutput)
@@ -159,6 +172,11 @@ def getDefaults():
         utils.getSetting('defaultcustomencodecommand'),
         'defaultadditionalhandbrakeargs':
         utils.getSetting('defaultadditionalhandbrakeargs')}
+    # Parse the 3 letter language code from selection
+    languagesearch = re.search( r"(.*\()(.*)\)",
+            defaultsettings['defaultnativelanguage'])
+    if languagesearch:
+        defaultsettings['defaultnativelanguage'] = languagesearch.group(2)
     return defaultsettings
 
 
@@ -232,6 +250,11 @@ def getProfile(defaultsettings, profilenum):
                     utils.getSetting(profile + 'customencodecommand'),
                     'additionalhandbrakeargs':
                     utils.getSetting(profile + 'additionalhandbrakeargs')}
+            # Parse the 3 letter language code from selection
+            languagesearch = re.search( r"(.*\()(.*)\)",
+                    profiledict['nativelanguage'])
+            if languagesearch:
+                profiledict['nativelanguage'] = languagesearch.group(2)
             for key, value in profiledict.iteritems():
                 if (value == 'default' or value == ''):
                     profiledict[key] = defaultsettings['default' + key]

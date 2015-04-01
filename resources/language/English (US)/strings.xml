@@ -73,4 +73,7 @@
 	<string id="30080">There Are No Profiles Enabled!</string>
 	<string id="30081">Rip Cancelled</string>
 	<string id="30082">Could Not Write To</string>
+	<string id="30083">Temp folder cannot handle large files.</string>
+	<string id="30084">This is usually caused by using FAT32 for storage.</string>
+	<string id="30085">Failed to Open Disc</string>
 </strings>

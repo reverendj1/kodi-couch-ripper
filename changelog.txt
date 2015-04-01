@@ -1,3 +1,12 @@
+0.1.5:
+  Bug Fixes:
+    - Shows error when writing to FAT32 drive
+    - Fixed MakeMKV errors so they display the error in Kodi
+    - Shows error when disc is missing
+    - Fixed visible options, so they show correctly when using custom commands
+  Features:
+    - Added language chooser
+
 0.1.4
   Bug Fixes:
     - Shows Error on Cancellation
