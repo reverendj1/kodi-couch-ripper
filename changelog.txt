@@ -1,3 +1,10 @@
+0.1.6:
+  Bug Fixes:
+    - Added workaround for Macs, or other systems using Python 2.6
+  Features:
+    - Added error logging when discs can't be read (usually due to being dirty
+      or hardware issues)
+
 0.1.5:
   Bug Fixes:
     - Shows error when writing to FAT32 drive

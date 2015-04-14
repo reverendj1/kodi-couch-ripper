@@ -46,8 +46,12 @@ def main(argv):
             commandstr = utils.getString(30071),
             command = command))
     try:
-        ripoutput = subprocess.check_output(
-                command, stderr=subprocess.STDOUT, shell=True)
+        if sys.version_info[:2] == (2,7):
+            ripoutput = subprocess.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
+        elif sys.version_info[:2] == (2,6):
+            ripoutput = utils.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
     # For some reason, it seems that this always exits with a non-zero
     # status, so I'm just checking the output for success.
     except subprocess.CalledProcessError, e:
@@ -62,6 +66,12 @@ def main(argv):
                 # 30084 = This is usually caused by using FAT32 for storage.
                 utils.exitFailed(utils.getstring(30083),
                         utils.getString(30083) + ' ' + utils.getString(30084))
+            if ('The source file' in e.output and
+                    ' is corrupt or invalid at offset' in e.output and
+                    ', attempting to work around' in e.output):
+                # 30087 = MakeMKV Had Trouble Reading the Disc. Try Cleaning it
+                # if the Correct Title Wasn't Ripped.
+                utils.log(utils.getString(30087))
         else:
             if 'Your temporary key has expired and was removed' in e.output:
                 # 30074 = Your temporary MakeMKV key has expired. Please update
@@ -76,6 +86,12 @@ def main(argv):
                 # 30085 = Failed to Open Disc
                 utils.exitFailed(utils.getString(30085),
                         utils.getString(30085))
+            if ('The source file' in e.output and
+                    ' is corrupt or invalid at offset' in e.output and
+                    ', attempting to work around' in e.output):
+                # 30086 = MakeMKV Had Trouble Reading the Disc. Try Cleaning it
+                utils.exitFailed(utils.getString(30086),
+                        utils.getString(30086))
             utils.exitFailed('MakeMKV {failed}'.format(
                     failed = utils.getString(30059)), e.output)
     utils.logDebug(ripoutput)

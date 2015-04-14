@@ -76,4 +76,6 @@
 	<string id="30083">Temp folder cannot handle large files.</string>
 	<string id="30084">This is usually caused by using FAT32 for storage.</string>
 	<string id="30085">Failed to Open Disc</string>
+	<string id="30086">MakeMKV Had Trouble Reading the Disc. Try Cleaning it.</string>
+	<string id="30087">MakeMKV Had Trouble Reading the Disc. Try Cleaning it if the Correct Title Wasn't Ripped.</string>
 </strings>
