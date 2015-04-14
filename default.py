@@ -129,8 +129,12 @@ def main(argv):
                 commandstr = utils.getString(30071),
                 command = command))
         try:
-            encodeoutput = subprocess.check_output(
-                    command, stderr=subprocess.STDOUT, shell=True)
+            if sys.version_info[:2] == (2,7):
+                encodeoutput = subprocess.check_output(
+                        command, stderr=subprocess.STDOUT, shell=True)
+            elif sys.version_info[:2] == (2,6):
+                encodeoutput = utils.check_output(
+                        command, stderr=subprocess.STDOUT, shell=True)
         except subprocess.CalledProcessError, e:
             if 'Encode done!' not in e.output:
                 utils.exitFailed('HandBrake {failed}'.format(

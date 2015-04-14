@@ -24,8 +24,12 @@ def main(argv):
                 pathtomakemkvcon = utils.getString(30016)))
     command = '"{makemkvpath}" info list -r'.format(makemkvpath=makemkvpath)
     try:
-        output = subprocess.check_output(
-                command, stderr=subprocess.STDOUT, shell=True)
+        if sys.version_info[:2] == (2,7):
+            output = subprocess.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
+        elif sys.version_info[:2] == (2,6):
+            output = utils.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
     except subprocess.CalledProcessError, e:
         output = e.output
     gooddrives = ''
