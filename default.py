@@ -563,7 +563,7 @@ def buildHandBrakeCLICommand(profiledict, f):
         elif profiledict['resolution'] == '720':
             maxwidth = ' --maxWidth 1280'
         elif profiledict['resolution'] == '480':
-            maxwidth = ' --maxWidth 640'
+            maxwidth = ' --maxWidth 720'
 
         if profiledict['quality'] == utils.getStringLow(30013):
             quality = ''
