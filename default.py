@@ -606,7 +606,7 @@ def buildHandBrakeCLICommand(profiledict, f, discName):
 	
 	if discName != None:
 	    if os.path.basename(f) in ['title00.mkv', 'title0.mkv', 'title.mkv']:
-	        destination = os.path.join(profiledict['destinationfolder'], os.path.basename(discName).replace('_', ' '))
+	        destination = os.path.join(profiledict['destinationfolder'], os.path.basename(discName).replace('_', ' '), os.path.splitext(f)[1])
             else:
 	        destination = os.path.join(profiledict['destinationfolder'], os.path.basename(discName + '-' + f).replace('_', ' '))
         else:
