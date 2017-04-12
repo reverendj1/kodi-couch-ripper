@@ -165,7 +165,7 @@ def main(argv):
                 completedsuccessfully = utils.getString(30058)))
 
     # if we have a name, the scan could pull in the metadata automatically for us
-    if discName != None:
+    if discName != None and profiledict['updatelibraryafterencode'] == 'true':
        xbmc.executebuiltin('UpdateLibrary("video")')
 
     return 0
@@ -187,6 +187,7 @@ def getDefaults():
         'defaultnativelanguage': utils.getSettingLow('defaultnativelanguage'),
         'defaultforeignaudio': utils.getSettingLow('defaultforeignaudio'),
         'defaultencodeafterrip': utils.getSettingLow('defaultencodeafterrip'),
+	'defaultupdatelibraryafterencode': utils.getSettingLow('defaultupdatelibraryafterencode'),
         'defaultejectafter': utils.getSettingLow('defaultejectafter'),
         'defaultnotifyafterrip': utils.getSettingLow('defaultnotifyafterrip'),
         'defaultnotifyafterencode':
@@ -259,6 +260,8 @@ def getProfile(defaultsettings, profilenum):
                     utils.getSettingLow(profile + 'foreignaudio'),
                     'encodeafterrip':
                     utils.getSettingLow(profile + 'encodeafterrip'),
+		    'updatelibraryafterencode':
+                    utils.getSettingLow(profile + 'updatelibraryafterencode'),
                     'ejectafter':
                     utils.getSettingLow(profile + 'ejectafter'),
                     'notifyafterrip':
@@ -303,6 +306,12 @@ def verifyProfile(profiledict):
                 '{invalid} {niceness}. '.format(
                 invalid = utils.getString(30056),
                 niceness = utils.getString(30018)))
+    if (profiledict['updatelibraryafterencode'] != 'true' and
+            profiledict['updatelibraryafterencode'] != 'false'):
+        errors = errors + utils.settingsError(
+                '{invalid} {updatelibraryafterencode}. '.format(
+                invalid = utils.getString(30056),
+                updatelibraryafterencode = utils.getString(30025)))
     if (profiledict['encodeafterrip'] != 'true' and
             profiledict['encodeafterrip'] != 'false'):
         errors = errors + utils.settingsError(
