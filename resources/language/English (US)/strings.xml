@@ -78,4 +78,5 @@
 	<string id="30085">Failed to Open Disc</string>
 	<string id="30086">MakeMKV Had Trouble Reading the Disc. Try Cleaning it.</string>
 	<string id="30087">MakeMKV Had Trouble Reading the Disc. Try Cleaning it if the Correct Title Wasn't Ripped.</string>
+	<string id="30088">Update Library After Encode</string>
 </strings>

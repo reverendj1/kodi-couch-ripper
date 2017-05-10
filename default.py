@@ -39,6 +39,11 @@ def main(argv):
     utils.logDebug(profiledict)
     command = buildMakeMKVConCommand(profiledict)
 
+    # TODO (??) user might want to specify a disc name in case the disc name
+    # is shortened or changed in a way that metadata libraries don't understand 
+    # what movie this is. many times though, the below will give you what you want
+    discName = getDiscName(profiledict)
+
     # Beginning Rip. Command:
     utils.log('{beginning} {rip}. {commandstr}: {command}'.format(
             beginning = utils.getString(30070),
@@ -122,7 +127,9 @@ def main(argv):
 
     filestoencode = glob.glob(os.path.join(profiledict['tempfolder'], '*.mkv'))
     for f in filestoencode:
-        command = buildHandBrakeCLICommand(profiledict, f)
+        # makemkvcon doesn't allow to customize the output filename
+        # but handbrake does, so pass it in to customize output filename option
+        command = buildHandBrakeCLICommand(profiledict, f, discName)
         utils.log('{beginning} {encode}. {commandstr}: {command}'.format(
                 beginning = utils.getString(30070),
                 encode = utils.getString(30028),
@@ -157,6 +164,10 @@ def main(argv):
                 encode = utils.getString(30028),
                 completedsuccessfully = utils.getString(30058)))
 
+    # if we have a name, the scan could pull in the metadata automatically for us
+    if discName != None and profiledict['updatelibraryafterencode'] == 'true':
+       xbmc.executebuiltin('UpdateLibrary("video")')
+
     return 0
 
 
@@ -176,6 +187,7 @@ def getDefaults():
         'defaultnativelanguage': utils.getSettingLow('defaultnativelanguage'),
         'defaultforeignaudio': utils.getSettingLow('defaultforeignaudio'),
         'defaultencodeafterrip': utils.getSettingLow('defaultencodeafterrip'),
+	'defaultupdatelibraryafterencode': utils.getSettingLow('defaultupdatelibraryafterencode'),
         'defaultejectafter': utils.getSettingLow('defaultejectafter'),
         'defaultnotifyafterrip': utils.getSettingLow('defaultnotifyafterrip'),
         'defaultnotifyafterencode':
@@ -248,6 +260,8 @@ def getProfile(defaultsettings, profilenum):
                     utils.getSettingLow(profile + 'foreignaudio'),
                     'encodeafterrip':
                     utils.getSettingLow(profile + 'encodeafterrip'),
+		    'updatelibraryafterencode':
+                    utils.getSettingLow(profile + 'updatelibraryafterencode'),
                     'ejectafter':
                     utils.getSettingLow(profile + 'ejectafter'),
                     'notifyafterrip':
@@ -292,6 +306,12 @@ def verifyProfile(profiledict):
                 '{invalid} {niceness}. '.format(
                 invalid = utils.getString(30056),
                 niceness = utils.getString(30018)))
+    if (profiledict['updatelibraryafterencode'] != 'true' and
+            profiledict['updatelibraryafterencode'] != 'false'):
+        errors = errors + utils.settingsError(
+                '{invalid} {updatelibraryafterencode}. '.format(
+                invalid = utils.getString(30056),
+                updatelibraryafterencode = utils.getString(30025)))
     if (profiledict['encodeafterrip'] != 'true' and
             profiledict['encodeafterrip'] != 'false'):
         errors = errors + utils.settingsError(
@@ -534,7 +554,7 @@ def buildMakeMKVConCommand(profiledict):
     return command
 
 
-def buildHandBrakeCLICommand(profiledict, f):
+def buildHandBrakeCLICommand(profiledict, f, discName):
     niceness = ''
     # 30013 == High, 30015 == Low, 30014 == Medium
     if (profiledict['niceness'] == utils.getString(30013).lower()
@@ -592,6 +612,14 @@ def buildHandBrakeCLICommand(profiledict, f):
             audiotracks = ' -a 1,2,3,4,5,6,7,8,9,10 '
         else:
             audiotracks = ''
+	
+	if discName != None:
+            if re.search(r"_t00?\.mkv$", os.path.basename(f)) != None or os.path.basename(f) in ['title00.mkv', 'title.mkv', 'title0.mkv']:
+	        destination = os.path.join(profiledict['destinationfolder'], os.path.basename(discName).replace('_', ' ') + os.path.splitext(f)[1])
+            else:
+	        destination = os.path.join(profiledict['destinationfolder'], os.path.basename(discName + '-' + f).replace('_', ' '))
+        else:
+            destination  = os.path.join(profiledict['destinationfolder'], os.path.basename(f).replace('_', ' '))
 
         command = ('{niceness}"{handbrakeclipath}" -i "{filename}" -o '
                 '"{destination}" -f mkv -d slower -N {nativelanguage} '
@@ -600,8 +628,7 @@ def buildHandBrakeCLICommand(profiledict, f):
                 niceness = niceness,
                 handbrakeclipath = profiledict['handbrakeclipath'],
                 filename = f,
-                destination = os.path.join(profiledict['destinationfolder'],
-                os.path.basename(f).replace('_', ' ')),
+                destination = destination,
                 nativelanguage = profiledict['nativelanguage'],
                 audiotracks = audiotracks,
                 quality = quality,
@@ -611,6 +638,34 @@ def buildHandBrakeCLICommand(profiledict, f):
 
     return command
 
+def getDiscName(profiledict):
+    makemkvpath = profiledict['makemkvpath']
+    drive_id = int(profiledict['driveid'])
+    command = '"{makemkvpath}" info list -r'.format(makemkvpath=makemkvpath)
+    try:
+        if sys.version_info[:2] == (2,7):
+            output = subprocess.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
+        elif sys.version_info[:2] == (2,6):
+            output = utils.check_output(
+                    command, stderr=subprocess.STDOUT, shell=True)
+    except subprocess.CalledProcessError, e:
+        output = e.output
+    gooddrives = ''
+    # Iterate through the output, it should look like this:
+    #MSG:1005,0,1,"MakeMKV v1.9.0 linux(x64-release) started","%1 started","MakeMKV v1.9.0 linux(x64-release)"
+    #DRV:0,2,999,0,"BD-RE HL-DT-ST BD-RE  WH14NS40 1.03","SquirrelWresting","/dev/sr0"
+    #DRV:1,256,999,0,"","",""
+    #DRV:2,256,999,0,"","",""
+
+    lines = iter(output.splitlines())
+    for line in lines:
+        drive = line.split(',')
+        if len(drive) >= 7:
+            if drive[5] != '""' and int(drive[0].split(':')[1]) == drive_id:
+                return drive[5].replace('"', '')
+
+    return None
 
 def getParams(argv):
     param = {}
