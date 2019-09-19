@@ -623,7 +623,7 @@ def buildHandBrakeCLICommand(profiledict, f, discName):
 
         command = ('{niceness}"{handbrakeclipath}" -i "{filename}" -o '
                 '"{destination}" -f mkv -d slower -N {nativelanguage} '
-                '--native-dub -m -Z "High Profile" -s 1{audiotracks}{quality}'
+                '--native-dub -m -Z "H.264 MKV 1080p30" -s 1{audiotracks}{quality}'
                 '{blackandwhite}{maxwidth}{additionalhandbrakeargs}'.format(
                 niceness = niceness,
                 handbrakeclipath = profiledict['handbrakeclipath'],
